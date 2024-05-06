@@ -1,6 +1,9 @@
 package pl.put.poznan.transformer.logic;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NumberTransformer extends TextTransformer {
 
@@ -18,27 +21,27 @@ public class NumberTransformer extends TextTransformer {
     @Override
     public String transform(String text) {
         StringBuilder sb = new StringBuilder();
-        String[] words = text.split(" ", -1);
+        Pattern pattern = Pattern.compile("(\\d+)(\\.(\\d+))?", Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(text);
 
-        for (String word : words) {
+        int currentIndex = 0;
+
+        while (matcher.find()) {
+            sb.append(text, currentIndex, matcher.start());
+            currentIndex = matcher.end();
             try {
-                double number = Double.parseDouble(word);
-                if(number < 0) {
-                    sb.append("minus ");
-                    number = -number;
-                }
+                BigDecimal number = new BigDecimal((matcher.group()));
 
-                double floatingPoint = (number - Math.floor(number)) * 100;
+                int floatingPoint = number.subtract(new BigDecimal(number.intValue())).movePointRight(2).intValue();
 
-                sb.append(numberToText((int) number)).append(floatingPointToString((int) floatingPoint)).append(" ");
+
+                sb.append(numberToText(number.intValue())).append(floatingPointToString(floatingPoint));
             } catch (NumberFormatException e) {
-                sb.append(word).append(" ");
+                sb.append(matcher.group());
             }
         }
 
-        if (sb.length() > 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
+        sb.append(text, currentIndex, text.length());
 
         return sb.toString();
     }

@@ -28,7 +28,7 @@ class NumberTransformerTest {
     @Test
     void testNegativeOnes() {
         Assertions.assertEquals(
-            "minus one minus two minus three minus four minus five minus six minus seven minus eight minus nine",
+            "-one -two -three -four -five -six -seven -eight -nine",
             transformer.transform("-1 -2 -3 -4 -5 -6 -7 -8 -9")
         );
     }
@@ -101,9 +101,9 @@ class NumberTransformerTest {
 
     @Test
     void testWithText() {
-        Assertions.assertEquals("one   one".length(), transformer.transform("1   1").length());
-        Assertions.assertEquals("one   ".length(), transformer.transform("1   ").length());
-        Assertions.assertEquals("   one".length(), transformer.transform("   1").length());
+        Assertions.assertEquals("one   one", transformer.transform("1   1"));
+        Assertions.assertEquals("one   ", transformer.transform("1   "));
+        Assertions.assertEquals("   one", transformer.transform("   1"));
 
         Assertions.assertEquals(
                 "Test number one",
@@ -111,20 +111,34 @@ class NumberTransformerTest {
         );
 
         Assertions.assertEquals(
-                "Test number minus one",
+                "Test number -one",
                 transformer.transform("Test number -1")
         );
     }
 
     @Test
     void testInvalidFormats() {
+        Assertions.assertEquals("10000.009", transformer.transform("10000.009"));
+        Assertions.assertEquals("zero", transformer.transform("0.003"));
+    }
+
+    @Test
+    void testDifferentFormats() {
         Assertions.assertEquals(
-                "Test number 1.1.1",
+                "Test number one and one tenth.one",
                 transformer.transform("Test number 1.1.1")
         );
 
-        Assertions.assertEquals("10000.003", transformer.transform("10000.003"));
-        Assertions.assertEquals("zero", transformer.transform("0.003"));
+        Assertions.assertEquals(
+                "Test five;thirty two; twenty one-twenty one-twelve one and two tenths-four and four tenths",
+                transformer.transform("Test 5;32; 21-21-12 1.2-4.4")
+        );
+
+        Assertions.assertEquals(
+                "one and two tenths#one and thirty one hundredths#one and thirty one hundredths" +
+                        "#three hundred twelve and fifty one hundredths#one and fifty two hundredths",
+                transformer.transform("1.2#1.31#1.31#312.51#1.52")
+        );
     }
 
     @Test
