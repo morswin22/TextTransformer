@@ -22,7 +22,7 @@ public class TextTransformerController {
         logger.debug(Arrays.toString(transforms));
 
         // perform the transformation, you should run your logic here, below is just a silly example
-        TextTransformer transformer = new TextTransformer(transforms);
+        TextTransformer transformer = new TextTransformer();
         return transformer.transform(text);
     }
 
@@ -35,12 +35,9 @@ public class TextTransformerController {
         logger.debug(Arrays.toString(transforms));
 
         // perform the transformation, you should run your logic here, below is just a silly example
-        TextTransformer transformer = new TextTransformer(transforms);
+        TextTransformer transformer = new TextTransformer();
         return transformer.transform(text);
     }
-
-
-
 }
 
 
