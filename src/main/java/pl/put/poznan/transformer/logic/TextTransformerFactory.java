@@ -19,6 +19,8 @@ class TextTransformerFactory {
                 return new CapitalizeTransformer();
             case "latex":
                 return new LatexTransformer();
+            case "acronym":
+                return new AcronymTransformer();
             default:
                 throw new IllegalArgumentException("Invalid transformation type " + type);
         }
