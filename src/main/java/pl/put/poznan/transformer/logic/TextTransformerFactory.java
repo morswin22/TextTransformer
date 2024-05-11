@@ -17,6 +17,8 @@ class TextTransformerFactory {
                 return  new NumberTransformer();
             case "capitalize":
                 return new CapitalizeTransformer();
+            case "latex":
+                return new LatexTransformer();
             default:
                 throw new IllegalArgumentException("Invalid transformation type " + type);
         }

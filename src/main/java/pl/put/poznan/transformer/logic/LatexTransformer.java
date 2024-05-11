@@ -2,7 +2,7 @@ package pl.put.poznan.transformer.logic;
 
 import java.util.regex.Matcher;
 
-public class LatexTransformer extends TextTransformer {
+public class LatexTransformer implements TextTransformer {
     @Override
     public String transform(String text) {
         return text
