@@ -21,6 +21,8 @@ class TextTransformerFactory {
                 return new LatexTransformer();
             case "acronym":
                 return new AcronymTransformer();
+            case "expansion":
+                return new ExpansionTransformer();
             default:
                 throw new IllegalArgumentException("Invalid transformation type " + type);
         }

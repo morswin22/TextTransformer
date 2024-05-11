@@ -23,18 +23,6 @@ public class AcronymTransformer implements TextTransformer {
         }
     }
 
-    static private class Replacement {
-        final public String replacement;
-        final public int start;
-        final public int end;
-
-        private Replacement(String replacement, int start, int end) {
-            this.replacement = replacement;
-            this.start = start;
-            this.end = end;
-        }
-    }
-
     @Override
     public String transform(String text) {
         final List<Acronym> acronyms = new ArrayList<>();
