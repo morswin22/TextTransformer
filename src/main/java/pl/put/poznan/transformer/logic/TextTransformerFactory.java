@@ -7,6 +7,8 @@ import java.util.List;
 class TextTransformerFactory {
     public static TextTransformer createTransformer(String type) {
         switch (type.toLowerCase()) {
+            case "repetition" :
+                return new RemoveRepetition();
             case "reverse":
                 return new ReverseTransformer();
             case "lower":

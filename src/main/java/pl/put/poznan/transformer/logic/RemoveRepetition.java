@@ -1,15 +1,25 @@
 package pl.put.poznan.transformer.logic;
 
-public class RemoveRepetition {
-    public String removeRepetition(String text) {
-        String previous_word = "";
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RemoveRepetition implements TextTransformer {
+    @Override
+    public String transform(String text) {
         StringBuilder reviewedText = new StringBuilder();
-        for (String word : text.split(" ")) {
-            if (!previous_word.equals(word)) {
-                reviewedText.append(word).append(" ");
+        Pattern pattern = Pattern.compile("\\b(\\w+)\\b", Pattern.MULTILINE | Pattern.UNICODE_CASE);
+        Matcher matcher = pattern.matcher(text);
+        String previousWord = "";
+        int x = 0;
+        while (matcher.find()) {
+            String word = matcher.group();
+            if (!previousWord.equals(word)) {
+                reviewedText.append(text, x, matcher.end());
             }
-            previous_word = word;
+            x = matcher.end();
+            previousWord = word;
         }
+        reviewedText.append(text.substring(x));
         return reviewedText.toString();
     }
 }
