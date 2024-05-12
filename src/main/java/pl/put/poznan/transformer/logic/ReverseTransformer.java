@@ -21,10 +21,10 @@ public class ReverseTransformer implements TextTransformer
         for (int i = 0; i < text.length(); i++) {
             char letter = text.charAt(i);
             if (casesR[i] == 1) {
-                transformedText.append(Character.toUpperCase(letter));
+                transformedText.append(Character.toLowerCase(letter));
             }
             else if (casesR[i] == -1) {
-                transformedText.append(Character.toLowerCase(letter));
+                transformedText.append(Character.toUpperCase(letter));
             }
             else {
                 transformedText.append(letter);
