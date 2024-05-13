@@ -26,7 +26,7 @@ class TextTransformerFactory {
             case "expansion":
                 return new ExpansionTransformer();
             default:
-                throw new IllegalArgumentException("Invalid transformation type " + type);
+                throw new IllegalArgumentException("Invalid transformation type: " + type);
         }
     }
     public static List<TextTransformer> createTransformers(List<String> types) {
