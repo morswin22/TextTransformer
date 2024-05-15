@@ -3,38 +3,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.TextTransformerService;
+import pl.put.poznan.transformer.rest.model.TransformModel;
 
 import java.util.Arrays;
 
 
 @RestController
-@RequestMapping("/{text}")
 public class TextTransformerController {
 
     private static final Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
 
     private final TextTransformerService textTransformerService = new TextTransformerService();
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public String get(@PathVariable String text,
-                              @RequestParam(value="transforms", defaultValue="upper,escape") String[] transforms) {
+    @PostMapping(path = "/transform", produces = "application/json")
+    public String get(@RequestBody TransformModel model) {
 
-        // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
+        logger.debug(model.getText());
+        logger.debug(Arrays.toString(model.getTransforms()));
 
-        return textTransformerService.transform(text, Arrays.asList(transforms));
-    }
-
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public String post(@PathVariable String text,
-                      @RequestBody String[] transforms) {
-
-        // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
-
-        return textTransformerService.transform(text, Arrays.asList(transforms));
+        return textTransformerService.transform(model.getText(), Arrays.asList(model.getTransforms()));
     }
 }
 
