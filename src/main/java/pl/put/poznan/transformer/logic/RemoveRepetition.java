@@ -13,8 +13,9 @@ public class RemoveRepetition implements TextTransformer {
         int x = 0;
         while (matcher.find()) {
             String word = matcher.group();
-            if (!previousWord.equals(word)) {
-                reviewedText.append(text, x, matcher.end());
+            if (!previousWord.equals(word) || (x != matcher.start() - 1)) {
+                reviewedText.append(text, x, matcher.start());
+                reviewedText.append(word);
             }
             x = matcher.end();
             previousWord = word;
