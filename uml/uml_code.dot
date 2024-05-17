@@ -1,0 +1,38 @@
+digraph "ExpansionTransformer" {
+
+splines  = ortho;
+fontname = "Inconsolata";
+
+node [colorscheme = ylgnbu4];
+edge [colorscheme = dark28, dir = both];
+
+Acronym                [shape = record, label = "{ Acronym | - Acronym(String, String, boolean) \l|+ replacements : List\<Character\>\l + hasDots : boolean\l + regex : String\l }"];
+AcronymTransformer     [shape = record, label = "{ AcronymTransformer | + AcronymTransformer() \l|+ transform(String) : String\l }"];
+Expansion              [shape = record, label = "{ Expansion | - Expansion(String, String) \l|+ regex : String\l + replacements : List\<String\>\l }"];
+ExpansionTransformer   [shape = record, label = "{ ExpansionTransformer | + ExpansionTransformer() \l|+ transform(String) : String\l }"];
+NumberTransformer      [shape = record, label = "{ NumberTransformer | + NumberTransformer() \l|- numberToText : HashMap\<Integer, String\>\l|- numberToText(int) : String\l + transform(String) : String\l - wholeNumberToString(int, int) : String\l - floatingPointToString(int) : String\l }"];
+RemoveRepetition       [shape = record, label = "{ RemoveRepetition | + RemoveRepetition() \l|+ transform(String) : String\l }"];
+Replacement            [shape = record, label = "{ Replacement | ~ Replacement(String, int, int) \l|+ replacement : String\l + end : int\l + start : int\l }"];
+TextTransformer        [shape = record, label = "{ \<\<interface\>\>\nTextTransformer | + transform(String) : String\l }"];
+TextTransformerFactory [shape = record, label = "{ TextTransformerFactory | + TextTransformerFactory() \l|+ createTransformers(List\<String\>) : List\<TextTransformer\>\l + createTransformer(String) : TextTransformer\l }"];
+TextTransformerService [shape = record, label = "{ TextTransformerService | + TextTransformerService() \l|+ transform(String, List\<String\>) : String\l }"];
+
+Acronym                -> AcronymTransformer     [color = "#820000", style = solid , arrowtail = odot    , arrowhead = none    , taillabel = "", label = "", headlabel = ""];
+AcronymTransformer     -> Acronym                [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+AcronymTransformer     -> Replacement            [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+AcronymTransformer     -> TextTransformer        [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+Expansion              -> ExpansionTransformer   [color = "#820000", style = solid , arrowtail = odot    , arrowhead = none    , taillabel = "", label = "", headlabel = ""];
+ExpansionTransformer   -> Expansion              [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+ExpansionTransformer   -> Replacement            [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+ExpansionTransformer   -> TextTransformer        [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+NumberTransformer      -> TextTransformer        [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+RemoveRepetition       -> TextTransformer        [color = "#008200", style = dashed, arrowtail = none    , arrowhead = normal  , taillabel = "", label = "", headlabel = ""];
+TextTransformerFactory -> AcronymTransformer     [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+TextTransformerFactory -> ExpansionTransformer   [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+TextTransformerFactory -> NumberTransformer      [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+TextTransformerFactory -> RemoveRepetition       [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+TextTransformerFactory -> TextTransformer        [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+TextTransformerService -> TextTransformer        [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+TextTransformerService -> TextTransformerFactory [color = "#595959", style = dashed, arrowtail = none    , arrowhead = vee     , taillabel = "", label = "", headlabel = ""];
+
+}
