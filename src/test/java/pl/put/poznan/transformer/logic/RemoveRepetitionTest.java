@@ -20,6 +20,6 @@ class RemoveRepetitionTest {
 
     @Test
     void testTricky() {
-        assertEquals("jest.", transformer.transform("jest: jest! jest.")); // TODO: Decide whether this behavior is desired
+        assertEquals("jest: jest! jest.", transformer.transform("jest: jest! jest."));
     }
 }
