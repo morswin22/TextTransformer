@@ -16,15 +16,7 @@ public class TransformModel {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public String[] getTransforms() {
         return transforms;
-    }
-
-    public void setTransforms(String[] transforms) {
-        this.transforms = transforms;
     }
 }
