@@ -30,6 +30,10 @@ class TextTransformerFactory
                 return new ExpansionTransformer();
             case "shuffle":
                 return new ShuffleTransformer();
+            case "count-characters":
+                return new CharacterCounterTransformer();
+            case "count-words":
+                return new WordCounterTransformer();
             default:
                 throw new IllegalArgumentException("Invalid transformation type: " + type);
         }
