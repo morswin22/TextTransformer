@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This class is responsible for transforming text to an anagram.
+ * This class is responsible for shuffling the text.
  */
-public class AnagramTransformer implements TextTransformer
+public class ShuffleTransformer implements TextTransformer
 {
     /**
-     * This method transforms the input text to an anagram.
+     * This method is responsible for the shuffle transformation.
      *
      * @param text The input text to be transformed.
      * @return The transformed text.
@@ -21,8 +21,8 @@ public class AnagramTransformer implements TextTransformer
         if (text.isEmpty())
             return "";
 
-        StringBuilder anagram = null;
-        while (anagram == null || anagram.toString().equals(text))
+        StringBuilder shuffle = null;
+        while (shuffle == null || shuffle.toString().equals(text))
         {
             List<Character> characters = new ArrayList<>();
             for (char c : text.toCharArray())
@@ -31,11 +31,11 @@ public class AnagramTransformer implements TextTransformer
 
             Collections.shuffle(characters);
 
-            anagram = new StringBuilder();
+            shuffle = new StringBuilder();
             for (char c : characters)
-                anagram.append(c);
+                shuffle.append(c);
 
         }
-        return anagram.toString();
+        return shuffle.toString();
     }
 }

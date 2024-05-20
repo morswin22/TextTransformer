@@ -28,8 +28,8 @@ class TextTransformerFactory
                 return new AcronymTransformer();
             case "expansion":
                 return new ExpansionTransformer();
-            case "anagram":
-                return new AnagramTransformer();
+            case "shuffle":
+                return new ShuffleTransformer();
             default:
                 throw new IllegalArgumentException("Invalid transformation type: " + type);
         }
