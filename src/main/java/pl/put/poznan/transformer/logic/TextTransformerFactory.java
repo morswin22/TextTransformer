@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Define the factory class
-class TextTransformerFactory {
-    public static TextTransformer createTransformer(String type) {
-        switch (type.toLowerCase()) {
-            case "repetition" :
+class TextTransformerFactory
+{
+    public static TextTransformer createTransformer(String type)
+    {
+        switch (type.toLowerCase())
+        {
+            case "repetition":
                 return new RemoveRepetition();
             case "reverse":
                 return new ReverseTransformer();
@@ -16,7 +19,7 @@ class TextTransformerFactory {
             case "upper":
                 return new UppercaseTransformer();
             case "number":
-                return  new NumberTransformer();
+                return new NumberTransformer();
             case "capitalize":
                 return new CapitalizeTransformer();
             case "latex":
@@ -25,13 +28,18 @@ class TextTransformerFactory {
                 return new AcronymTransformer();
             case "expansion":
                 return new ExpansionTransformer();
+            case "shuffle":
+                return new ShuffleTransformer();
             default:
                 throw new IllegalArgumentException("Invalid transformation type: " + type);
         }
     }
-    public static List<TextTransformer> createTransformers(List<String> types) {
+
+    public static List<TextTransformer> createTransformers(List<String> types)
+    {
         List<TextTransformer> transformers = new ArrayList<>();
-        for (String type : types) {
+        for (String type : types)
+        {
             transformers.add(createTransformer(type));
         }
         return transformers;
