@@ -26,6 +26,8 @@ class TextTransformerServiceTest {
                     }
         });
         Assertions.assertEquals("twelve", mockService.transform("12", operations));
+        verify(mockService, times(1)).transform("12", operations);
+        verify(mockNumber, times(1)).transform("12");
     }
     @Test
     public void testUppercase() {
@@ -43,6 +45,8 @@ class TextTransformerServiceTest {
                     }
                 });
         Assertions.assertEquals("OKAY", mockService.transform("okay", operations));
+        verify(mockService, times(1)).transform("okay", operations);
+        verify(mockUppercase, times(1)).transform("okay");
     }
     @Test
     public void testCapitalize() {
@@ -60,6 +64,8 @@ class TextTransformerServiceTest {
                     }
                 });
         Assertions.assertEquals("Okay", mockService.transform("okay", operations));
+        verify(mockCapitalize, times(1)).transform("okay");
+        verify(mockService, times(1)).transform("okay", operations);
     }
     @Test
     public void testLowercase() {
@@ -77,6 +83,8 @@ class TextTransformerServiceTest {
                     }
                 });
         Assertions.assertEquals("okay", mockService.transform("OKAY", operations));
+        verify(mockLowercase, times(1)).transform("OKAY");
+        verify(mockService, times(1)).transform("OKAY", operations);
     }
     @Test
     public void testReverse() {
@@ -94,5 +102,7 @@ class TextTransformerServiceTest {
                     }
                 });
         Assertions.assertEquals("KerIm", mockService.transform("MirEk", operations));
+        verify(mockService, times(1)).transform("MirEk", operations);
+        verify(mockReverse, times(1)).transform("MirEk");
     }
 }
